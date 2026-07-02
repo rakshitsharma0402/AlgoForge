@@ -89,20 +89,37 @@ public class SinglyLinkedList {
     }
 
     public Object get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Invalid position: " + index);
+        }
 
+        Node curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next;
+        }
+        return curr.data;
     }
 
     public boolean isEmpty() {
-
+        return (head == null);
     }
 
     public int size() {
-
+        return size;
     }
 
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Node curr = head;
 
+        while (curr != null) {
+            sb.append(curr.data).append(" -> ");
+            curr = curr.next;
+        }
+
+        sb.append("null");
+        return sb.toString();
     }
 }
 
