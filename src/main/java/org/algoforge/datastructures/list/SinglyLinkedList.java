@@ -1,5 +1,7 @@
 package org.algoforge.datastructures.list;
 
+import java.util.NoSuchElementException;
+
 public class SinglyLinkedList {
 
     private static class Node {
@@ -77,15 +79,67 @@ public class SinglyLinkedList {
     }
 
     public void deleteAtBeginning() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Linked List is Empty");
+        }
 
+        Node curr = head;
+        head = curr.next;
+        curr.next = null;
+
+        if (head == null) {
+            tail = null;
+        }
+
+        size--;
     }
 
     public void deleteAtEnd() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Linked List is Empty");
+        }
 
+        if (head.next == null) {
+            head = null;
+            tail = null;
+            size--;
+            return;
+        }
+
+        Node curr = head;
+
+        for (int i = 0; i < size - 1; i++) {
+            curr = curr.next;
+        }
+
+        curr.next = null;
+        tail = curr;
+        size--;
     }
 
     public void deleteAtIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Invalid position: " + index);
+        }
 
+        if (index == 0) {
+            deleteAtBeginning();
+            return;
+        }
+
+        if (index == size-1) {
+            deleteAtEnd();
+            return;
+        }
+
+        Node curr = head;
+
+        for (int i = 0; i < index - 1; i++) {
+            curr = curr.next;
+        }
+
+        curr.next = curr.next.next;
+        size--;
     }
 
     public Object get(int index) {
