@@ -127,7 +127,7 @@ public class SinglyLinkedList {
             return;
         }
 
-        if (index == size-1) {
+        if (index == size - 1) {
             deleteAtEnd();
             return;
         }
