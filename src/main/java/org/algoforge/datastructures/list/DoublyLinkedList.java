@@ -1,5 +1,7 @@
 package org.algoforge.datastructures.list;
 
+import java.util.NoSuchElementException;
+
 public class DoublyLinkedList {
     private static class Node {
         Object data;
@@ -97,15 +99,75 @@ public class DoublyLinkedList {
     }
 
     public void deleteAtBeginning() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Linked List is Empty");
+        }
 
+        if (head.next == null) {
+            head = tail = null;
+        } else {
+            Node curr = head;
+            head = curr.next;
+            curr.next = null;
+            head.prev = null;
+        }
+
+        size--;
     }
 
     public void deleteAtEnd() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Linked List is Empty");
+        }
 
+        if (head.next == null) {
+            head = tail = null;
+        } else {
+            Node curr = tail;
+
+            tail = curr.prev;
+            curr.prev = null;
+            tail.next = null;
+        }
+
+        size--;
     }
 
     public void deleteAtIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Invalid position: " + index);
+        }
 
+        if (index == 0) {
+            deleteAtBeginning();
+            return;
+        }
+        if (index == size - 1) {
+            deleteAtEnd();
+            return;
+        }
+
+        if (index <= size / 2) {
+            Node curr = head;
+
+            for (int i = 0; i < index - 1; i++) {
+                curr = curr.next;
+            }
+
+            curr.next = curr.next.next;
+            curr.next.prev = curr;
+        } else {
+            Node curr = tail;
+
+            for (int i = size - 1; i > index; i--) {
+                curr = curr.prev;
+            }
+
+            curr.prev.next = curr.next;
+            curr.next.prev = curr.prev;
+        }
+
+        size--;
     }
 
     public Object get(int index) {
