@@ -103,7 +103,7 @@ public class DoublyLinkedList {
             throw new NoSuchElementException("Linked List is Empty");
         }
 
-        if(head.next == null) {
+        if (head.next == null) {
             head = tail = null;
         } else {
             Node curr = head;
@@ -116,7 +116,21 @@ public class DoublyLinkedList {
     }
 
     public void deleteAtEnd() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Linked List is Empty");
+        }
 
+        if (head.next == null) {
+            head = tail = null;
+        } else {
+            Node curr = tail;
+
+            tail = curr.prev;
+            curr.prev = null;
+            tail.next = null;
+        }
+
+        size--;
     }
 
     public void deleteAtIndex(int index) {
