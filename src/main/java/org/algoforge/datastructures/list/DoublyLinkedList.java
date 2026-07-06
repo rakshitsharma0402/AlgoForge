@@ -24,7 +24,19 @@ public class DoublyLinkedList {
     }
 
     public void insertAtBeginning(Object val) {
+        Node newNode = new Node(val);
+        Node curr = head;
 
+        if(isEmpty()) {
+            head = tail = newNode;
+        }
+        else {
+            newNode.next = curr;
+            curr.prev = newNode;
+            head = newNode;
+        }
+
+        size++;
     }
 
     public void insertAtEnd(Object val) {
