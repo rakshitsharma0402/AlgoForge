@@ -171,7 +171,15 @@ public class DoublyLinkedList {
     }
 
     public Object get(int index) {
-        return 0;
+        if (index < 0 || size <= index) {
+            throw new IndexOutOfBoundsException("Invalid position: " + index);
+        }
+
+        Node curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr.next;
+        }
+        return curr.data;
     }
 
     public boolean isEmpty() {
@@ -179,7 +187,7 @@ public class DoublyLinkedList {
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
