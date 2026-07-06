@@ -40,7 +40,18 @@ public class DoublyLinkedList {
     }
 
     public void insertAtEnd(Object val) {
+        Node newNode = new Node(val);
 
+        if(isEmpty()) {
+            insertAtBeginning(val);
+            return;
+        }
+
+        tail.next = newNode;
+        newNode.prev = tail;
+        tail = newNode;
+
+        size++;
     }
 
     public void insertAtIndex(int index, Object val) {
