@@ -171,14 +171,22 @@ public class DoublyLinkedList {
     }
 
     public Object get(int index) {
-        if (index < 0 || size <= index) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Invalid position: " + index);
         }
 
-        Node curr = head;
-        for (int i = 0; i < index; i++) {
-            curr = curr.next;
+        if (index <= size / 2) {
+            Node curr = head;
+            for (int i = 0; i < index; i++) {
+                curr = curr.next;
+            }
+        } else {
+            Node curr = tail;
+            for (int i = size - 1; i > index; i--) {
+                curr = curr.prev;
+            }
         }
+
         return curr.data;
     }
 
