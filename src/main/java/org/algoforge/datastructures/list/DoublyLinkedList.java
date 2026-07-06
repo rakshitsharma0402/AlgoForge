@@ -192,10 +192,28 @@ public class DoublyLinkedList {
 
     @Override
     public String toString() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        Node curr = head;
+
+        while (curr != null) {
+            sb.append(curr.data).append(" -> ");
+            curr = curr.next;
+        }
+
+        sb.append("null");
+        return sb.toString();
     }
 
     public String toStringReversed() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        Node curr = tail;
+
+        while (curr != null) {
+            sb.append(curr.data).append(" -> ");
+            curr = curr.prev;
+        }
+
+        sb.append("null");
+        return sb.toString();
     }
 }
