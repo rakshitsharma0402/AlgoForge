@@ -1,5 +1,7 @@
 package org.algoforge.datastructures.list;
 
+import java.util.NoSuchElementException;
+
 public class DoublyLinkedList {
     private static class Node {
         Object data;
@@ -97,7 +99,20 @@ public class DoublyLinkedList {
     }
 
     public void deleteAtBeginning() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Linked List is Empty");
+        }
 
+        if(head.next == null) {
+            head = tail = null;
+        } else {
+            Node curr = head;
+            head = curr.next;
+            curr.next = null;
+            head.prev = null;
+        }
+
+        size--;
     }
 
     public void deleteAtEnd() {
