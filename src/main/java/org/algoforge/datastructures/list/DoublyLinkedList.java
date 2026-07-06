@@ -175,7 +175,7 @@ public class DoublyLinkedList {
     }
 
     public boolean isEmpty() {
-        return false;
+        return (head == null);
     }
 
     public int size() {
