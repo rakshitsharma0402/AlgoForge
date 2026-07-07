@@ -2,13 +2,13 @@ package org.algoforge.datastructures.list;
 
 import java.util.NoSuchElementException;
 
-public class SinglyLinkedList {
+public class SinglyLinkedList implements List {
 
     private static class Node {
         Object data;
         Node next;
 
-        Node(Object data) {
+        public Node(Object data) {
             this.data = data;
             this.next = null;
         }
