@@ -2,7 +2,7 @@ package org.algoforge.datastructures.list;
 
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedList {
+public class DoublyLinkedList implements List {
     private static class Node {
         Object data;
         Node next;
