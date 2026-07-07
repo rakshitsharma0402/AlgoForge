@@ -47,11 +47,12 @@ public class SinglyLinkedList {
 
         tail.next = newNode;
         tail = newNode;
+
         size++;
     }
 
-    public void insertAtIndex(int index, Object val) {
-        if (index < 0 || index > size) {
+    public void insertAtIndex(Object val, int index) {
+        if (index < 0 || size() < index) {
             throw new IndexOutOfBoundsException("Invalid position: " + index);
         }
 
@@ -60,11 +61,10 @@ public class SinglyLinkedList {
             return;
         }
 
-        if (index == size) {
+        if (index == size()) {
             insertAtEnd(val);
             return;
         }
-
 
         Node newNode = new Node(val);
         Node curr = head;
@@ -75,6 +75,7 @@ public class SinglyLinkedList {
 
         newNode.next = curr.next;
         curr.next = newNode;
+
         size++;
     }
 
@@ -83,14 +84,13 @@ public class SinglyLinkedList {
             throw new NoSuchElementException("Linked List is Empty");
         }
 
-        Node curr = head;
-        head = curr.next;
-        curr.next = null;
-
-        if (head == null) {
-            tail = null;
+        if (head.next == null) {
+            head = tail = null;
+        } else {
+            Node curr = head;
+            head = curr.next;
+            curr.next = null;
         }
-
         size--;
     }
 
@@ -100,25 +100,23 @@ public class SinglyLinkedList {
         }
 
         if (head.next == null) {
-            head = null;
-            tail = null;
-            size--;
-            return;
+            head = tail = null;
+        } else {
+            Node curr = head;
+
+            for (int i = 0; i < size() - 2; i++) {
+                curr = curr.next;
+            }
+
+            curr.next = null;
+            tail = curr;
         }
 
-        Node curr = head;
-
-        for (int i = 0; i < size - 1; i++) {
-            curr = curr.next;
-        }
-
-        curr.next = null;
-        tail = curr;
         size--;
     }
 
     public void deleteAtIndex(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || size() <= index) {
             throw new IndexOutOfBoundsException("Invalid position: " + index);
         }
 
@@ -127,7 +125,7 @@ public class SinglyLinkedList {
             return;
         }
 
-        if (index == size - 1) {
+        if (index == size() - 1) {
             deleteAtEnd();
             return;
         }
@@ -139,11 +137,12 @@ public class SinglyLinkedList {
         }
 
         curr.next = curr.next.next;
+
         size--;
     }
 
     public Object get(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || size() <= index) {
             throw new IndexOutOfBoundsException("Invalid position: " + index);
         }
 
