@@ -56,7 +56,7 @@ public class DoublyLinkedList {
     }
 
     public void insertAtIndex(Object val, int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || size() < index) {
             throw new IndexOutOfBoundsException("Invalid position: " + index);
         }
 
@@ -64,14 +64,14 @@ public class DoublyLinkedList {
             insertAtBeginning(val);
             return;
         }
-        if (index == size) {
+        if (index == size()) {
             insertAtEnd(val);
             return;
         }
 
         Node newNode = new Node(val);
 
-        if (index <= size / 2) {
+        if (index <= size() / 2) {
             Node curr = head;
 
             for (int i = 0; i < index - 1; i++) {
@@ -85,7 +85,7 @@ public class DoublyLinkedList {
         } else {
             Node curr = tail;
 
-            for (int i = size - 1; i > index; i--) {
+            for (int i = size() - 1; i > index; i--) {
                 curr = curr.prev;
             }
 
@@ -134,7 +134,7 @@ public class DoublyLinkedList {
     }
 
     public void deleteAtIndex(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || size() <= index) {
             throw new IndexOutOfBoundsException("Invalid position: " + index);
         }
 
@@ -142,12 +142,12 @@ public class DoublyLinkedList {
             deleteAtBeginning();
             return;
         }
-        if (index == size - 1) {
+        if (index == size() - 1) {
             deleteAtEnd();
             return;
         }
 
-        if (index <= size / 2) {
+        if (index <= size() / 2) {
             Node curr = head;
 
             for (int i = 0; i < index - 1; i++) {
@@ -159,7 +159,7 @@ public class DoublyLinkedList {
         } else {
             Node curr = tail;
 
-            for (int i = size - 1; i > index; i--) {
+            for (int i = size() - 1; i > index; i--) {
                 curr = curr.prev;
             }
 
@@ -171,18 +171,19 @@ public class DoublyLinkedList {
     }
 
     public Object get(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || size() <= index) {
             throw new IndexOutOfBoundsException("Invalid position: " + index);
         }
 
-        if (index <= size / 2) {
-            Node curr = head;
+        Node curr;
+        if (index <= size() / 2) {
+            curr = head;
             for (int i = 0; i < index; i++) {
                 curr = curr.next;
             }
         } else {
-            Node curr = tail;
-            for (int i = size - 1; i > index; i--) {
+            curr = tail;
+            for (int i = size() - 1; i > index; i--) {
                 curr = curr.prev;
             }
         }
