@@ -90,8 +90,27 @@ public class CircularLinkedList implements List {
     }
 
     public Object get(int index) {
-        return null;
+        if (index < 0 || size() <= index) {
+            throw new IndexOutOfBoundsException("Invalid position: " + index);
+        }
+
+        Node curr;
+
+        if (index <= size() / 2) {
+            curr = head;
+            for (int i = 0; i < index; i++) {
+                curr = curr.next;
+            }
+        } else {
+            curr = tail;
+            for (int i = size() - 1; i > index; i--) {
+                curr = curr.prev;
+            }
+        }
+
+        return curr.data;
     }
+
 
     public boolean isEmpty() {
         return false;
