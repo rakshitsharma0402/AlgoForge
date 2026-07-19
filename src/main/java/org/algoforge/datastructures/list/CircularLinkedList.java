@@ -70,7 +70,23 @@ public class CircularLinkedList implements List {
     }
 
     public String toStringReversed() {
-        return "";
+        if (isEmpty()) {
+            return "empty";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Node curr = tail;
+
+        for (int i = 0; i < size; i++) {
+            sb.append(curr.data);
+            if (i < size - 1) {
+                sb.append(" -> ");
+            }
+            curr = curr.prev;
+        }
+
+        sb.append(" -> (tail)");
+        return sb.toString();
     }
 
     public Object get(int index) {
