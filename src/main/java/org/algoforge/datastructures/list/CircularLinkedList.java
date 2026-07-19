@@ -117,6 +117,6 @@ public class CircularLinkedList implements List {
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 }
