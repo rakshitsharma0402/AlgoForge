@@ -59,7 +59,23 @@ public class CircularLinkedList implements List {
     }
 
     public void deleteAtEnd() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Linked List is Empty");
+        }
 
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            Node curr = tail;
+
+            tail = curr.prev;
+            tail.next = head;
+            head.prev = tail;
+            curr.prev = null;
+            curr.next = null;
+        }
+
+        size--;
     }
 
     public void deleteAtIndex(int index) {
