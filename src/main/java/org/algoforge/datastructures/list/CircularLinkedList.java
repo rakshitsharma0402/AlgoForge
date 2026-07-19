@@ -50,7 +50,23 @@ public class CircularLinkedList implements List {
 
     @Override
     public String toString() {
-        return "";
+        if (isEmpty()) {
+            return "empty";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Node curr = head;
+
+        for (int i = 0; i < size; i++) {
+            sb.append(curr.data);
+            if (i < size - 1) {
+                sb.append(" -> ");
+            }
+            curr = curr.next;
+        }
+
+        sb.append(" -> (head)");
+        return sb.toString();
     }
 
     public String toStringReversed() {
