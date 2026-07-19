@@ -184,22 +184,73 @@ public class CircularLinkedList implements List {
 
     @Override
     public String toString() {
-        return "";
+        if (isEmpty()) {
+            return "empty";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Node curr = head;
+
+        for (int i = 0; i < size; i++) {
+            sb.append(curr.data);
+            if (i < size - 1) {
+                sb.append(" -> ");
+            }
+            curr = curr.next;
+        }
+
+        sb.append(" -> (head)");
+        return sb.toString();
     }
 
     public String toStringReversed() {
-        return "";
+        if (isEmpty()) {
+            return "empty";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Node curr = tail;
+
+        for (int i = 0; i < size; i++) {
+            sb.append(curr.data);
+            if (i < size - 1) {
+                sb.append(" -> ");
+            }
+            curr = curr.prev;
+        }
+
+        sb.append(" -> (tail)");
+        return sb.toString();
     }
 
     public Object get(int index) {
-        return null;
+        if (index < 0 || size() <= index) {
+            throw new IndexOutOfBoundsException("Invalid position: " + index);
+        }
+
+        Node curr;
+
+        if (index <= size() / 2) {
+            curr = head;
+            for (int i = 0; i < index; i++) {
+                curr = curr.next;
+            }
+        } else {
+            curr = tail;
+            for (int i = size() - 1; i > index; i--) {
+                curr = curr.prev;
+            }
+        }
+
+        return curr.data;
     }
 
+
     public boolean isEmpty() {
-        return false;
+        return head == null;
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 }
