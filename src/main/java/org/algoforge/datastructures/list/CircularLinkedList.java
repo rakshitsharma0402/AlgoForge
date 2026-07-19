@@ -60,7 +60,46 @@ public class CircularLinkedList implements List {
     }
 
     public void insertAtIndex(Object val, int index) {
+        if (index < 0 || size() < index) {
+            throw new IndexOutOfBoundsException("Invalid position: " + index);
+        }
 
+        if (index == 0) {
+            insertAtBeginning(val);
+            return;
+        }
+        if (index == size()) {
+            insertAtEnd(val);
+            return;
+        }
+
+        Node newNode = new Node(val);
+
+        if (index <= size() / 2) {
+            Node curr = head;
+
+            for (int i = 0; i < index - 1; i++) {
+                curr = curr.next;
+            }
+
+            newNode.next = curr.next;
+            newNode.prev = curr;
+            curr.next = newNode;
+            newNode.next.prev = newNode;
+        } else {
+            Node curr = tail;
+
+            for (int i = size() - 1; i > index; i--) {
+                curr = curr.prev;
+            }
+
+            newNode.prev = curr.prev;
+            newNode.next = curr;
+            curr.prev = newNode;
+            newNode.prev.next = newNode;
+        }
+
+        size++;
     }
 
     public void deleteAtBeginning() {
