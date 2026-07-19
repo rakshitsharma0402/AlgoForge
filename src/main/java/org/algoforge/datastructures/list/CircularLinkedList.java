@@ -1,5 +1,7 @@
 package org.algoforge.datastructures.list;
 
+import java.util.NoSuchElementException;
+
 public class CircularLinkedList implements List {
 
     private static class Node {
@@ -37,7 +39,23 @@ public class CircularLinkedList implements List {
     }
 
     public void deleteAtBeginning() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Linked List is Empty");
+        }
 
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            Node curr = head;
+
+            head = curr.next;
+            head.prev = tail;
+            tail.next = head;
+            curr.next = null;
+            curr.prev = null;
+        }
+
+        size--;
     }
 
     public void deleteAtEnd() {
