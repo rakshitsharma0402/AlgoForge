@@ -43,7 +43,20 @@ public class CircularLinkedList implements List {
     }
 
     public void insertAtEnd(Object val) {
+        Node newNode = new Node(val);
 
+        if (isEmpty()) {
+            insertAtBeginning(val);
+            return;
+        }
+
+        newNode.prev = tail;
+        tail.next = newNode;
+        newNode.next = head;
+        head.prev = newNode;
+        tail = newNode;
+
+        size++;
     }
 
     public void insertAtIndex(Object val, int index) {
